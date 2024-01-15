@@ -29,10 +29,10 @@ import { PostavkeProfilaComponent } from './postavke-profila/postavke-profila.co
   imports: [
     BrowserModule,
     RouterModule.forRoot([
-      {path: 'studenti', component: StudentiComponent},
+      {path: 'studenti', component: StudentiComponent, canActivate: [AutorizacijaLoginProvjera]},
       {path: 'login', component: LoginComponent},
       {path: 'registracija', component: RegistracijaComponent},
-      {path: 'student-maticnaknjiga/:id', component: StudentMaticnaknjigaComponent},
+      {path: 'student-maticnaknjiga/:id', component: StudentMaticnaknjigaComponent, canActivate: [AutorizacijaLoginProvjera]},
       {path: 'home', component: HomeComponent, canActivate: [AutorizacijaLoginProvjera]},
       {path: 'postavke-profila', component: PostavkeProfilaComponent, canActivate: [AutorizacijaLoginProvjera]},
       {path: '**', component: NotFoundComponent, canActivate: [AutorizacijaLoginProvjera]},
