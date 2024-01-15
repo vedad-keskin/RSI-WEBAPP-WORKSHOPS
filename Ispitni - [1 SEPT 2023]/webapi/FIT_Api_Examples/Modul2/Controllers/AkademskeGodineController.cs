@@ -19,6 +19,7 @@ namespace FIT_Api_Examples.Modul2.Controllers
         }
 
         [HttpGet]
+        [Route("/GetAllAkademskeGodine")]
         public List<CmbStavke> GetAll_ForCmb()
         {
             return _dbContext.AkademskaGodina

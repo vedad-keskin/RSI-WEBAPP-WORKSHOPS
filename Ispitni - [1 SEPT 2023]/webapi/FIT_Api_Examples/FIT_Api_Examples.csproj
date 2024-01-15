@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <UserSecretsId>d34a87ca-df94-40ff-9646-3a36e6c2616a</UserSecretsId>
   </PropertyGroup>
 
@@ -17,10 +17,5 @@
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Modul3_MaticnaKnjiga\Models\" />
-	  <Folder Include="Modul3_MaticnaKnjiga\ViewModels\" />
 	</ItemGroup>
 </Project>

@@ -54,6 +54,7 @@ namespace FIT_Api_Examples.Modul2.Controllers
         }
 
         [HttpGet]
+        [Route("/GetAllOpstine")]
         public List<CmbStavke> GetByAll()
         {
             var data = _dbContext.Opstina

@@ -39,5 +39,68 @@ namespace FIT_Api_Examples.Modul2.Controllers
             return data.Take(100).ToList();
         }
 
+        [HttpPost]
+        [Route("/DodajStudenta")]
+
+        public ActionResult DodajStudenta([FromBody] DodajStudentVM x)
+        {
+            if (!HttpContext.GetLoginInfo().isLogiran)
+                return BadRequest("nije logiran");
+
+            Student novi;
+            if(x.id == 0)
+            {
+                novi = new Student();
+                _dbContext.Student.Add(novi);
+            }
+            else
+            {
+                novi = _dbContext.Student.Find(x.id);
+            }
+
+            novi.ime = x.ime;
+            novi.prezime = x.prezime;
+            novi.opstina_rodjenja_id = x.opstina_rodjenja_id;
+
+            _dbContext.SaveChanges();
+
+            return Ok();
+        }
+        [HttpPost]
+        [Route("/ObrisiStudenta")]
+
+        public ActionResult ObrisiStudenta([FromBody] int studentid)
+        {
+            if (!HttpContext.GetLoginInfo().isLogiran)
+                return BadRequest("nije logiran");
+
+
+            var student = _dbContext.Student.Find(studentid);
+
+            _dbContext.Student.Remove(student);
+       
+
+            _dbContext.SaveChanges();
+
+            return Ok();
+        }
+
+        [HttpGet]
+        [Route("/GetStudent")]
+
+
+        public ActionResult<Student> GetStudent([FromQuery] int studentid)
+        {
+            //if (!HttpContext.GetLoginInfo().isLogiran)
+            //    return BadRequest("nije logiran");
+
+
+            var student = _dbContext.Student.Find(studentid);
+
+
+            return Ok(student);
+
+
+        }
     }
 }

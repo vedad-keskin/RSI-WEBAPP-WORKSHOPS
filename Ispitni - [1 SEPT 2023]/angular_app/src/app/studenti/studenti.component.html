@@ -2,11 +2,11 @@
 
 <div>
   <input [(ngModel)] = "filter_ime_prezime" type="checkbox"> Filter by <span style="font-weight: bold">Ime / prezime</span> <br>
-  <input [(ngModel)]="ime_prezime"><br>
+  <input [(ngModel)]="ime_prezime" [disabled]="!filter_ime_prezime"><br>
   <hr>
 
   <input [(ngModel)] = "filter_opstina" type="checkbox"> Filter by <span style="font-weight: bold">Opština rođenja</span> <br>
-  <input [(ngModel)]="opstina"><br>
+  <input [(ngModel)]="opstina" [disabled]="!filter_opstina"><br>
   <hr>
 </div>
 <table class="table table-warning">
@@ -22,7 +22,7 @@
     <th>Akcija</th>
   </tr>
   <tbody>
-  <tr *ngFor="let s of this.studentPodaci">
+  <tr *ngFor="let s of FiltrirajStudente()">
     <td>{{s.id}}</td>
     <td>{{s.ime}}</td>
     <td>{{s.prezime}}</td>
@@ -32,14 +32,88 @@
     <td>{{s.datum_rodjenja}}</td>
     <td><img class="profilna-slika" src="{{s.slika_korisnika}}"></td>
     <td>
-      <button>Obrisi</button>
-      <button>Uredi</button>
-      <button>Maticna knjiga</button>
+      <button (click)="Obrisi(s.id)">Obrisi</button>
+      <button (click)="edit_student=s">Uredi</button>
+      <button routerLink="/student-maticnaknjiga/{{s.id}}">Maticna knjiga</button>
     </td>
   </tr>
   </tbody>
 </table>
 
-<button class="form-label">Novi student</button>
+<button class="form-label" (click)="NoviStudent()">Novi student</button>
 
 
+<!-- DODAJ STUDENTA MODAL --->
+
+<div *ngIf="novi_student" class="modal fade show" id="exampleModalLive" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLiveLabel">Dodaj student </h5>
+        <button type="button" class="btn-close" (click)="novi_student=null" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label">Ime studenta</label>
+          <input class="form-control" [(ngModel)]="novi_student.ime"  placeholder="Ime">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Prezime studenta</label>
+          <input class="form-control" [(ngModel)]="novi_student.prezime" placeholder="Prezime"/>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Opstina rodjenja</label>
+          <select class="form-control" [(ngModel)]="novi_student.opstina_rodjenja_id">
+             <option *ngFor="let x of opstine" [value]="x.id">{{x.opis}}</option>
+          </select>
+        </div>
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="novi_student=null">Close</button>
+        <button type="button" class="btn btn-primary" (click)="SpasiStudenta()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- EDIT STUDENTA MODAL --->
+
+<div *ngIf="edit_student" class="modal fade show"  tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" >Edit student </h5>
+        <button type="button" class="btn-close" (click)="edit_student=null" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label">Ime studenta</label>
+          <input class="form-control" [(ngModel)]="edit_student.ime"  placeholder="Ime">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Prezime studenta</label>
+          <input class="form-control" [(ngModel)]="edit_student.prezime" placeholder="Prezime"/>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Opstina rodjenja</label>
+          <select class="form-control" [(ngModel)]="edit_student.opstina_rodjenja_id">
+            <option *ngFor="let x of opstine" [value]="x.id">{{x.opis}}</option>
+          </select>
+        </div>
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="edit_student=null">Close</button>
+        <button type="button" class="btn btn-primary" (click)="EditujStudenta()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
