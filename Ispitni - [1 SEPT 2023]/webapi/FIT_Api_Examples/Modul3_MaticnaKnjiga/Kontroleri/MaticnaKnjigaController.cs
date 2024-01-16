@@ -28,8 +28,8 @@ namespace FIT_Api_Examples.Modul3_MaticnaKnjiga.Kontroleri
 
         public ActionResult<List<UpisGodina>> GetUpiseStudenta([FromQuery] int studentid)
         {
-            //if (!HttpContext.GetLoginInfo().isLogiran)
-            //    return BadRequest("nije logiran");
+            if (!HttpContext.GetLoginInfo().isLogiran)
+                return BadRequest("nije logiran");
 
             var upisi = _dbContext.UpisGodina.Include("student").Include("evidentirao").Include("akademskaGodina").Where(x => x.studentid == studentid).ToList();
 

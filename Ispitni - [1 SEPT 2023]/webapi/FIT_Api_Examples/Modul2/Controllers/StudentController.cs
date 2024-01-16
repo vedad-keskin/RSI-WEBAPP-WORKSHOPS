@@ -91,8 +91,8 @@ namespace FIT_Api_Examples.Modul2.Controllers
 
         public ActionResult<Student> GetStudent([FromQuery] int studentid)
         {
-            //if (!HttpContext.GetLoginInfo().isLogiran)
-            //    return BadRequest("nije logiran");
+            if (!HttpContext.GetLoginInfo().isLogiran)
+                return BadRequest("nije logiran");
 
 
             var student = _dbContext.Student.Find(studentid);

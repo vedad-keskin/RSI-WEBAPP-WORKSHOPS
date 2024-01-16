@@ -47,6 +47,9 @@ export class StudentMaticnaknjigaComponent implements OnInit {
 
   private GetStudent() {
     this.httpKlijent.get(MojConfig.adresa_servera + '/GetStudent' , {
+      headers:{
+        'autentifikacija-token': AutentifikacijaHelper.getLoginInfo().autentifikacijaToken.vrijednost
+      },
       params:{studentid : this.studentID},
       observe:'response'
     }).subscribe(response=>{
@@ -88,6 +91,9 @@ export class StudentMaticnaknjigaComponent implements OnInit {
 
   private fetchUpisi() {
     this.httpKlijent.get(MojConfig.adresa_servera + '/GetUpise',{
+      headers:{
+        'autentifikacija-token':AutentifikacijaHelper.getLoginInfo().autentifikacijaToken.vrijednost
+      },
       params:{studentid:this.studentID},
       observe:'response'
     }).subscribe(response=>{
