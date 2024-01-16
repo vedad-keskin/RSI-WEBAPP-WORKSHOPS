@@ -1,0 +1,20 @@
+<p>login works!</p>
+
+<div class="mb-3 row">
+  <label for="txtKorisnickoIme" class="col-sm-2 col-form-label">Korisnicko ime</label>
+  <div class="col-sm-3">
+    <input id="txtKorisnickoIme" [(ngModel)]="txtKorisnickoIme" class="form-control">
+  </div>
+</div>
+
+<div class="mb-3 row">
+  <label for="txtLozinka" class="col-sm-2 col-form-label">Lozinka</label>
+  <div class="col-sm-3">
+    <input id="txtLozinka" [(ngModel)]="txtLozinka" class="form-control" type="password">
+  </div>
+</div>
+
+
+<button class="btn btn-primary" (click)="btnLogin()">Logiraj se</button>
+<br>
+<a routerLink="/registracija">Registracija</a>

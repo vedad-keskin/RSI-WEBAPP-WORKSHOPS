@@ -31,7 +31,7 @@ namespace FIT_Api_Examples.Modul3_MaticnaKnjiga.Kontroleri
             //if (!HttpContext.GetLoginInfo().isLogiran)
             //    return BadRequest("nije logiran");
 
-            var upisi = _dbContext.UpisGodina.Include("student").Include("evidentirao").Include("akademskaGodina") .Where(x => x.studentid == studentid).ToList();
+            var upisi = _dbContext.UpisGodina.Include("student").Include("evidentirao").Include("akademskaGodina").Where(x => x.studentid == studentid).ToList();
 
 
             return Ok(upisi);
